@@ -1,0 +1,48 @@
+[package]
+name = "sam-vector"
+version = "0.1.0"
+edition = "2021"
+authors = ["Magnus Trent <magnus@blackfall.dev>"]
+license = "MIT"
+repository = "https://github.com/Blackfall-Labs/sam-vector"
+description = "Vector similarity search and RAG infrastructure for AI systems"
+keywords = ["vector-search", "hnsw", "embeddings", "rag", "ai"]
+categories = ["database", "algorithms", "science"]
+
+[dependencies]
+# Vector search
+hnsw_rs = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database
+rusqlite = { version = "0.31", features = ["bundled", "serde_json"] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# ONNX runtime for embeddings
+ort = { version = "2.0.0-rc.10", features = ["half", "download-binaries"], optional = true }
+rust_tokenizers = { version = "8.1", optional = true }
+ndarray = { version = "0.15", optional = true }
+
+# Compression and bundling (for persistent store)
+bytepunch = { path = "../bytepunch-rs", optional = true }
+dataspool = { path = "../dataspool-rs", optional = true }
+
+# Error handling
+thiserror = "2.0"
+
+# Logging
+tracing = "0.1"
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }
+tempfile = "3.0"
+
+[features]
+default = ["onnx"]
+onnx = ["dep:ort", "dep:rust_tokenizers", "dep:ndarray"]
+persistence = ["dep:bytepunch", "dep:dataspool"]
+full = ["onnx", "persistence"]
