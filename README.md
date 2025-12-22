@@ -2,7 +2,7 @@
 
 **High-performance vector search, embeddings, and retrieval-augmented generation (RAG) for AI systems.**
 
-Extracted from the Frame project.
+Extracted from the Frame microservices architecture.
 
 ## Features
 
@@ -12,7 +12,27 @@ Extracted from the Frame project.
 - **RAG System**: High-level document indexing and retrieval interface
 - **Event Database**: Conversation and event storage with metadata
 
-## ONNX Model Setup**Required for embeddings feature:** Frame Catalog uses the MiniLM-L6-v2 ONNX model for generating 384-dimensional semantic embeddings.### Download ModelsRun the provided script to download the required ONNX model (~87MB):```bash./download-models.sh```This downloads:- `models/all-minilm-l6-v2.onnx` (87MB) - ONNX model- `models/all-minilm-l6-v2-tokenizer.json` (456KB) - Tokenizer config- `models/vocab.txt` (227KB) - BERT vocabularySee [`models/README.md`](models/README.md) for manual download instructions and model details.**Note:** Models are gitignored and must be downloaded separately. The `onnx` feature (enabled by default) requires these models.
+## ONNX Model Setup
+
+**Required for embeddings feature:** Frame Catalog uses the MiniLM-L6-v2 ONNX model for generating 384-dimensional semantic embeddings.
+
+### Download Models
+
+Run the provided script to download the required ONNX model (~87MB):
+
+```bash
+./download-models.sh
+```
+
+This downloads:
+- `models/all-minilm-l6-v2.onnx` (87MB) - ONNX model
+- `models/all-minilm-l6-v2-tokenizer.json` (456KB) - Tokenizer config
+- `models/vocab.txt` (227KB) - BERT vocabulary
+
+See [`models/README.md`](models/README.md) for manual download instructions and model details.
+
+**Note:** Models are gitignored and must be downloaded separately. The `onnx` feature (enabled by default) requires these models.
+
 ## Quick Start
 
 ```toml
@@ -20,19 +40,23 @@ Extracted from the Frame project.
 frame-catalog = "0.1.0"
 ```
 
+
 ## Dependency Architecture
 
 **frame-catalog is the base layer** for most Frame subsystems:
 
 ```
+
 frame-catalog
 └── (no Frame dependencies)
 ```
+
 
 **Used by:** frame-thoughtchain, frame-sentinel, frame-presence, frame-identity, frame-mesh
 
 **Position in Frame ecosystem:**
 ```
+
 frame-catalog (base layer)
     ├→ frame-thoughtchain (reasoning)
     ├→ frame-sentinel (trust)
@@ -41,7 +65,7 @@ frame-catalog (base layer)
     └→ frame-mesh (distributed) + frame-presence
 ```
 
-## ONNX Model Setup**Required for embeddings feature:** Frame Catalog uses the MiniLM-L6-v2 ONNX model for generating 384-dimensional semantic embeddings.### Download ModelsRun the provided script to download the required ONNX model (~87MB):```bash./download-models.sh```This downloads:- `models/all-minilm-l6-v2.onnx` (87MB) - ONNX model- `models/all-minilm-l6-v2-tokenizer.json` (456KB) - Tokenizer config- `models/vocab.txt` (227KB) - BERT vocabularySee [`models/README.md`](models/README.md) for manual download instructions and model details.**Note:** Models are gitignored and must be downloaded separately. The `onnx` feature (enabled by default) requires these models.
+
 ## Quick Start
 
 ```rust
@@ -74,6 +98,7 @@ for result in results {
 }
 ```
 
+
 ## Modules
 
 - **vector_store** (891 LOC) - HNSW similarity search with RwLock thread safety
@@ -101,12 +126,14 @@ let config = VectorStoreConfig {
 };
 ```
 
+
 ## Features
 
 ```toml
 [dependencies]
 frame-catalog = { version = "0.1.0", features = ["full"] }
 ```
+
 
 - `onnx` (default): ONNX Runtime embedding generation
 - `persistence`: SQLite persistence with BytePunch/DataSpool
@@ -153,6 +180,7 @@ cargo test                    # Run all tests (40 passing, 3 ignored)
 cargo test --features full    # Test with all features
 ```
 
+
 Ignored tests require ONNX model file (`models/all-minilm-l6-v2.onnx`).
 
 ## Compatibility
@@ -183,4 +211,3 @@ Magnus Trent <magnus@blackfall.dev>
 - **GitHub:** https://github.com/Blackfall-Labs/frame-catalog
 - **Docs:** https://docs.rs/frame-catalog
 - **Crates.io:** https://crates.io/crates/frame-catalog
-- **SAM Project:** https://github.com/Blackfall-Labs/sam
