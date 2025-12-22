@@ -1,4 +1,4 @@
-//! # SAM Vector - Vector Similarity Search and RAG Infrastructure
+//! # Frame Catalog - Vector Similarity Search and RAG Infrastructure
 //!
 //! High-performance vector search, embeddings, and retrieval-augmented generation (RAG)
 //! for AI systems.
@@ -52,9 +52,9 @@
 //! ## Usage
 //!
 //! ```rust,no_run
-//! use sam_vector::{VectorStore, VectorStoreConfig};
-//! use sam_vector::{OnnxEmbeddingGenerator, EmbeddingGenerator};
-//! use sam_vector::DocumentChunk;
+//! use frame_catalog::{VectorStore, VectorStoreConfig};
+//! use frame_catalog::{OnnxEmbeddingGenerator, EmbeddingGenerator};
+//! use frame_catalog::DocumentChunk;
 //!
 //! // Create embedding generator
 //! let embedder = OnnxEmbeddingGenerator::new().unwrap();

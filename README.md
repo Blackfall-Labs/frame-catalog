@@ -1,8 +1,8 @@
-# SAM Vector - Vector Similarity Search and RAG Infrastructure
+# Frame Catalog - Vector Similarity Search and RAG Infrastructure
 
 **High-performance vector search, embeddings, and retrieval-augmented generation (RAG) for AI systems.**
 
-Extracted from the SAM (Societal Advisory Module) project.
+Extracted from the Frame project.
 
 ## Features
 
@@ -16,11 +16,11 @@ Extracted from the SAM (Societal Advisory Module) project.
 
 ```toml
 [dependencies]
-sam-vector = "0.1.0"
+frame-catalog = "0.1.0"
 ```
 
 ```rust
-use sam_vector::{VectorStore, VectorStoreConfig, OnnxEmbeddingGenerator, EmbeddingGenerator, DocumentChunk};
+use frame_catalog::{VectorStore, VectorStoreConfig, OnnxEmbeddingGenerator, EmbeddingGenerator, DocumentChunk};
 
 // Create embedding generator
 let embedder = OnnxEmbeddingGenerator::new()?;
@@ -67,7 +67,7 @@ for result in results {
 ## Configuration
 
 ```rust
-use sam_vector::VectorStoreConfig;
+use frame_catalog::VectorStoreConfig;
 
 let config = VectorStoreConfig {
     ef_construction: 200,  // Build quality (higher = better recall, slower build)
@@ -80,7 +80,7 @@ let config = VectorStoreConfig {
 
 ```toml
 [dependencies]
-sam-vector = { version = "0.1.0", features = ["full"] }
+frame-catalog = { version = "0.1.0", features = ["full"] }
 ```
 
 - `onnx` (default): ONNX Runtime embedding generation
@@ -155,7 +155,7 @@ Magnus Trent <magnus@blackfall.dev>
 
 ## Links
 
-- **GitHub:** https://github.com/Blackfall-Labs/sam-vector
-- **Docs:** https://docs.rs/sam-vector
-- **Crates.io:** https://crates.io/crates/sam-vector
+- **GitHub:** https://github.com/Blackfall-Labs/frame-catalog
+- **Docs:** https://docs.rs/frame-catalog
+- **Crates.io:** https://crates.io/crates/frame-catalog
 - **SAM Project:** https://github.com/Blackfall-Labs/sam

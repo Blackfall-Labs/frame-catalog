@@ -1,12 +1,12 @@
 [package]
-name = "sam-vector"
+name = "frame-catalog"
 version = "0.1.0"
 edition = "2021"
 authors = ["Magnus Trent <magnus@blackfall.dev>"]
 license = "MIT"
-repository = "https://github.com/Blackfall-Labs/sam-vector"
-description = "Vector similarity search and RAG infrastructure for AI systems"
-keywords = ["vector-search", "hnsw", "embeddings", "rag", "ai"]
+repository = "https://github.com/Blackfall-Labs/frame-catalog"
+description = "Vector catalog and semantic indexing subsystem for Frame microservices"
+keywords = ["vector-search", "hnsw", "embeddings", "catalog", "mainframe"]
 categories = ["database", "algorithms", "science"]
 
 [dependencies]

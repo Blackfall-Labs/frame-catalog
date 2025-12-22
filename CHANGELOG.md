@@ -3,7 +3,7 @@
 ## [0.1.0] - 2025-12-21
 
 ### Added
-- Initial release extracted from SAM project
+- Initial release extracted from Frame project
 - **HNSW Vector Search**: Fast similarity search with sub-millisecond queries
   - Hierarchical Navigable Small World graph index
   - RwLock for thread-safe concurrent reads
@@ -61,7 +61,7 @@
 - 1 doctest passing
 
 ### Notes
-- Extracted from [SAM (Societal Advisory Module)](https://github.com/Blackfall-Labs/sam)
+- Extracted from [Frame](https://github.com/Blackfall-Labs/sam)
 - Platform-independent with ONNX Runtime
 - Production-ready for RAG applications
 - Designed for offline-first AI systems
