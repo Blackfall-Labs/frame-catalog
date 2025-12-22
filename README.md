@@ -19,6 +19,29 @@ Extracted from the Frame project.
 frame-catalog = "0.1.0"
 ```
 
+## Dependency Architecture
+
+**frame-catalog is the base layer** for most Frame subsystems:
+
+```
+frame-catalog
+└── (no Frame dependencies)
+```
+
+**Used by:** frame-thoughtchain, frame-sentinel, frame-presence, frame-identity, frame-mesh
+
+**Position in Frame ecosystem:**
+```
+frame-catalog (base layer)
+    ├→ frame-thoughtchain (reasoning)
+    ├→ frame-sentinel (trust)
+    ├→ frame-presence (sessions)
+    ├→ frame-identity (biometrics) + frame-sentinel
+    └→ frame-mesh (distributed) + frame-presence
+```
+
+## Quick Start
+
 ```rust
 use frame_catalog::{VectorStore, VectorStoreConfig, OnnxEmbeddingGenerator, EmbeddingGenerator, DocumentChunk};
 
