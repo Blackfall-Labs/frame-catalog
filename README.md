@@ -12,6 +12,7 @@ Extracted from the Frame project.
 - **RAG System**: High-level document indexing and retrieval interface
 - **Event Database**: Conversation and event storage with metadata
 
+## ONNX Model Setup**Required for embeddings feature:** Frame Catalog uses the MiniLM-L6-v2 ONNX model for generating 384-dimensional semantic embeddings.### Download ModelsRun the provided script to download the required ONNX model (~87MB):```bash./download-models.sh```This downloads:- `models/all-minilm-l6-v2.onnx` (87MB) - ONNX model- `models/all-minilm-l6-v2-tokenizer.json` (456KB) - Tokenizer config- `models/vocab.txt` (227KB) - BERT vocabularySee [`models/README.md`](models/README.md) for manual download instructions and model details.**Note:** Models are gitignored and must be downloaded separately. The `onnx` feature (enabled by default) requires these models.
 ## Quick Start
 
 ```toml
@@ -40,6 +41,7 @@ frame-catalog (base layer)
     └→ frame-mesh (distributed) + frame-presence
 ```
 
+## ONNX Model Setup**Required for embeddings feature:** Frame Catalog uses the MiniLM-L6-v2 ONNX model for generating 384-dimensional semantic embeddings.### Download ModelsRun the provided script to download the required ONNX model (~87MB):```bash./download-models.sh```This downloads:- `models/all-minilm-l6-v2.onnx` (87MB) - ONNX model- `models/all-minilm-l6-v2-tokenizer.json` (456KB) - Tokenizer config- `models/vocab.txt` (227KB) - BERT vocabularySee [`models/README.md`](models/README.md) for manual download instructions and model details.**Note:** Models are gitignored and must be downloaded separately. The `onnx` feature (enabled by default) requires these models.
 ## Quick Start
 
 ```rust

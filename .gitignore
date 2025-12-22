@@ -12,3 +12,8 @@ Cargo.lock
 # OS
 .DS_Store
 Thumbs.db
+
+# ONNX models (downloaded separately)
+models/*.onnx
+models/*.json
+models/vocab.txt
