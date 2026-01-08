@@ -156,10 +156,6 @@ impl OnnxEmbeddingGenerator {
             .join("models")
             .join("all-minilm-l6-v2.onnx");
 
-        let tokenizer_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("models")
-            .join("all-minilm-l6-v2-tokenizer.json");
-
         // Load ONNX model with ort 2.0 API
         let session = ort::session::Session::builder()
             .map_err(|e| EmbeddingError::Model(format!("Failed to create session builder: {}", e)))?
@@ -167,7 +163,7 @@ impl OnnxEmbeddingGenerator {
             .map_err(|e| EmbeddingError::Model(format!("Failed to load model: {}", e)))?;
 
         // Load tokenizer using rust_tokenizers (pure Rust, no native dependencies)
-        use rust_tokenizers::tokenizer::{BertTokenizer, Tokenizer, TruncationStrategy};
+        use rust_tokenizers::tokenizer::BertTokenizer;
         use rust_tokenizers::vocab::{BertVocab, Vocab};
 
         // rust_tokenizers expects vocab.txt, so we convert the tokenizer.json if needed
@@ -235,7 +231,6 @@ impl EmbeddingGenerator for OnnxEmbeddingGenerator {
 
         // Tokenize using rust_tokenizers API
         use rust_tokenizers::tokenizer::{Tokenizer, TruncationStrategy};
-        use rust_tokenizers::TokenizedInput;
 
         let tokenized = self.tokenizer.encode(
             text,
