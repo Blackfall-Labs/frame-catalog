@@ -2,7 +2,9 @@
 //!
 //! Provides high-level RAG (Retrieval-Augmented Generation) functionality
 
-use crate::embeddings::{EmbeddingGenerator, OnnxEmbeddingGenerator, SimpleEmbeddingGenerator};
+use crate::embeddings::{EmbeddingGenerator, SimpleEmbeddingGenerator};
+#[cfg(feature = "onnx")]
+use crate::embeddings::OnnxEmbeddingGenerator;
 use crate::vector_store::{DocumentChunk, SearchResult, VectorStore, VectorStoreConfig};
 use std::sync::Arc;
 
@@ -64,18 +66,25 @@ impl RetrievalSystem {
         let vector_store = VectorStore::new(config.vector_config.clone())?;
 
         // Try to use ONNX embeddings first (real semantic embeddings)
+        #[cfg(feature = "onnx")]
         let embedder: Arc<dyn EmbeddingGenerator> = match OnnxEmbeddingGenerator::new() {
             Ok(onnx_gen) => {
-                tracing::info!("✅ Using ONNX semantic embeddings (MiniLM-L6-v2, 384d)");
+                tracing::info!("Using ONNX semantic embeddings (MiniLM-L6-v2, 384d)");
                 Arc::new(onnx_gen)
             }
             Err(e) => {
                 tracing::warn!(
-                    "⚠️  ONNX embeddings unavailable ({}), falling back to simple hash-based embeddings",
+                    "ONNX embeddings unavailable ({}), falling back to simple hash-based embeddings",
                     e
                 );
                 Arc::new(SimpleEmbeddingGenerator::new())
             }
+        };
+
+        #[cfg(not(feature = "onnx"))]
+        let embedder: Arc<dyn EmbeddingGenerator> = {
+            tracing::info!("Using simple hash-based embeddings (ONNX feature not enabled)");
+            Arc::new(SimpleEmbeddingGenerator::new())
         };
 
         Ok(Self {

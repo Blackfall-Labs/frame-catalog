@@ -141,12 +141,14 @@ impl EmbeddingGenerator for SimpleEmbeddingGenerator {
 /// ONNX-based embedding generator using sentence-transformers model
 ///
 /// Uses all-MiniLM-L6-v2 model for 384-dimensional semantic embeddings
+#[cfg(feature = "onnx")]
 pub struct OnnxEmbeddingGenerator {
     session: std::sync::Mutex<ort::session::Session>,
     tokenizer: rust_tokenizers::tokenizer::BertTokenizer,
     dimension: usize,
 }
 
+#[cfg(feature = "onnx")]
 impl OnnxEmbeddingGenerator {
     /// Create a new ONNX embedding generator
     ///
@@ -223,6 +225,7 @@ impl OnnxEmbeddingGenerator {
     }
 }
 
+#[cfg(feature = "onnx")]
 impl EmbeddingGenerator for OnnxEmbeddingGenerator {
     fn generate(&self, text: &str) -> Result<Vec<f32>> {
         if text.is_empty() {
